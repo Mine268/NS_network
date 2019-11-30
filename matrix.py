@@ -26,7 +26,7 @@ class matrix(object):
         rol, col = len(array), len(array[0])
         for i in range(0, rol):
             for j in range(0, col):
-                if (str(array[i][j]).isdigit() == True):
+                if (type(array[i][j]) == type(1) or type(array[i][j]) == type(1.1)):
                     self.__mat[i].append(array[i][j])
                 else:
                     raise Exception(print(f"输入中存在非数字。（array[{i}][{j}] == {array[i][j]}）"))
@@ -39,6 +39,7 @@ class matrix(object):
     def toString(self):
         res = ""
         for i in range(0, self.__size[0]):
+            res += f"{i}: "
             for j in range(0, self.__size[1]):
                 res += " " + str(self.__mat[i][j])
             if (i != self.__size[0] - 1):
@@ -58,7 +59,12 @@ class matrix(object):
     def setAt(self, rol, col, val):
         matrix.__legalPos(self, rol, col)
         self.__mat[rol - 1][col - 1] = val
-    
+
+    # 在ij处累加
+    def appendAt(self, rol, col, val):
+        matrix.__legalPos(self, rol, col)
+        self.__mat[rol - 1][col - 1] += val
+
     # 矩阵的转置
     @staticmethod
     def Transposition(__mat):
